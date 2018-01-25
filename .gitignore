@@ -1,0 +1,4 @@
+*.swp
+ssl/letsencrypt
+fullchain.pem
+privkey.pem
