@@ -29,6 +29,10 @@ for thingy in $POSSIBLE_DOMAINS; do
     sed -i "s@##POSSIBLE_DOMAINS@##POSSIBLE_DOMAINS\\nmodparam(\"corex\", \"alias_subdomains\", \"${thingy}\")@" /etc/kamailio/kamailio.cfg
 done
 
+# Set the shmem and pkgmem defaults if they are not already
+[ -z "$KAMAILIO_SH_MEM" ] || KAMAILIO_SH_MEM=64
+[ -z "$KAMAILIO_PKG_MEM" ] || KAMAILIO_PKG_MEM=8
+
 set +x
 
 echo "###################################"
@@ -41,4 +45,4 @@ echo "######    kamailio.cfg      #######"
 echo "###################################"
 cat /etc/kamailio/kamailio.cfg
 
-exec /usr/sbin/kamailio -DD -P /var/run/kamailio.pid -f /etc/kamailio/kamailio.cfg
+exec /usr/sbin/kamailio -m $KAMAILIO_SH_MEM -M $KAMAILIO_PKG_MEM -DD -P /var/run/kamailio.pid -f /etc/kamailio/kamailio.cfg

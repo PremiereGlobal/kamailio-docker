@@ -19,6 +19,8 @@ ENV SIPDOMAIN=sip.domain.com
 ENV PW="mysql_root_pass"
 ENV MYSQL_PASS="mysql_root_pass"
 ENV MYSQL_HOST="db.somedomain.com"
+ENV KAMAILIO_SH_MEM=128
+ENV KAMAILIO_PGK_MEM=12
 
 ADD ./kamctlrc /etc/kamailio/kamctlrc
 ADD run.sh /run.sh
