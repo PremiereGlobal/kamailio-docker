@@ -19,8 +19,8 @@ after_success:
 notifications:
   slack:
     template:
-      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
-      - "Image Name: readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT"
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch}> by %{author} %{result} in %{duration}"
+      - "Image Name: readytalk/kamailio-docker:3.2.%{build_number}-%{commit}"
     on_success: always # default: always
     on_failure: always # default: always
     rooms:
