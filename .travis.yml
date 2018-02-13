@@ -10,7 +10,10 @@ addons:
       - docker-ce
 
 env:
-  - IMAGE_NAME=kamailio-docker COMMIT=${TRAVIS_COMMIT::8} MAJ_VERSION="3.2"
+  global:
+    - IMAGE_NAME=kamailio-docker 
+    - COMMIT=${TRAVIS_COMMIT::8} 
+    - MAJ_VERSION="3.2"
 
 install: true
 
