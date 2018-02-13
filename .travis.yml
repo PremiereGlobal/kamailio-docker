@@ -6,7 +6,7 @@ services:
 env:
   global:
   - IMAGE_NAME=kamailio-docker
-  - COMMIT=${TRAVIS_COMMIT::8}
+  - COMMIT=${TRAVIS_COMMIT}
   - MAJ_VERSION="3.2"
 install: true
 script:
