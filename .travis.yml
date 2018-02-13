@@ -1,0 +1,22 @@
+sudo: required
+dist: trusty
+language: python
+
+services:
+  - docker
+
+env:
+  - IMAGE_NAME=kamailio-docker
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - MAJ_VERSION=3.2
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - docker build -t readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT .
+      - docker images
+    - stage: push docker image
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - docker push readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT
+
