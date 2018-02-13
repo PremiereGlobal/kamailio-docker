@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ReadyTalk/kamailio-docker.svg?branch=master)](https://travis-ci.org/ReadyTalk/kamailio-docker)
+
 # Kamailio-Docker
 
 Runs kamailio in a docker container.  Has several options for configuring kamailio, and an example config.
