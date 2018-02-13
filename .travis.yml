@@ -2,25 +2,22 @@ sudo: required
 dist: trusty
 language: python
 services:
-  - docker
-
-addons:
-  apt:
-    packages:
-      - docker-ce
-
+- docker
 env:
   global:
-    - IMAGE_NAME=kamailio-docker 
-    - COMMIT=${TRAVIS_COMMIT::8} 
-    - MAJ_VERSION="3.2"
-
+  - IMAGE_NAME=kamailio-docker
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - MAJ_VERSION="3.2"
 install: true
-
 script:
-  - docker build -t readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT .
-  - docker images
-
+- docker build -t readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT
+  .
+- docker images
 after_success:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker push readytalk/$IMAGE_NAME:$MAJ_VERSION.$TRAVIS_BUILD_NUMBER-$COMMIT
+
+
+notifications:
+  slack:
+    secure: Y4FwhYEhT6SD1TGGmX/ZdjtPMO388LiBq7sibKnKMsHlQ5DJlCcVyIDkqvDyaC04h71f3ufL2Mfgo6w7uk7RJlLodMDT5blbx8KMrXNemk27krehXN6r1citVR0DBTnRkCBdO7YObu8m8UaTog0CkLFEwzwC8DHolXufknr51qhXwCBrTlXcC+6BCuCRfhL7MLWHbZaul2cRbWjppTx9pro03gO06ytK61YvMHOMLPhRnSoVUNLeOXD0hqBktMf/dge9BLyl0SKU+O27WacPaFRaA+TKFn6ZO+CSsR7ED1cQCRO0BXnvs0ux/Y5WYBaqgAvLWjX+97e11yGOiSOWGijKjO5/DzSMkaqFh6tgQJLJdlpCnq4I7YAgwB7dgmoWnenGtyCcZ4r3CehzSsUej+r49EduFkSylYb/WwnaRoyiJWH16qK8iqR3W/J86vorZvaCSVNW8KMUxbU+ODct9uA3L9baPQg+ufCYt/TJRsR1+KJqQzSF07hXdMJ+hQSQZ5F/C+ZWwLkycnMNbkAGfuTiNN+N5ivsbyM6Sbqtus+anhZzRm5ZAGBvUvneT3EvdVulkZE+soZWuCjopfnl5DTwlGaYrt1L9EKxg8AV28CeEVYHS5O1H5tw7jJMtqDcQEVB4JdvErEk6eGnFOjoYnhYYCXlkCF2PTEO0u4LTd8=
