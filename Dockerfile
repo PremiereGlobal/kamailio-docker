@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
       kamailio-tls-modules \
       kamailio-presence-modules \
       procps \
+      tcpdump \
       curl \
     && apt-get clean && rm -rf /var/lib/apt/lists
 
