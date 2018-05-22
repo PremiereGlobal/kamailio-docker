@@ -8,7 +8,6 @@ X=($(echo $KAM_TMP | tr " " "\n"))
 KAM_VER=${X[2]}
 
 KAM_A=(${KAM_VER//./ })
-GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 docker tag rt-freeswitch:latest readytalk/kamailio-docker:${KAM_VER}
 docker tag rt-freeswitch:latest readytalk/kamailio-docker:${KAM_A[0]}.${KAM_A[1]}
@@ -19,7 +18,7 @@ echo "Saved Tag \"kamailio-docker:${KAM_A[0]}.${KAM_A[1]}\""
 echo "Saved Tag \"kamailio-docker:latest\""
 echo "-----------------------"
 
-if [[ ${TRAVIS} && "${GIT_BRANCH}" == "master" ]]; then
+if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" ]]; then
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   docker push readytalk/kamailio-docker:${KAM_VER}
   docker push readytalk/kamailio-docker:${KAM_A[0]}.${KAM_A[1]}
