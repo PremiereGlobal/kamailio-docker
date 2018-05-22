@@ -8,15 +8,18 @@ env:
   - IMAGE_NAME=kamailio-docker
   - COMMIT=${TRAVIS_COMMIT::7}
   - MAJ_VERSION="3.2"
+  - secure: Xbqg/a6ff49XnOarpHeLD0eLJzB7K/RpZuuITujik2fuTB7o+KdPmQLkoc/2owrbulwBBGKbIuPadE6B2/GxAEsvdaTO/wfj5VgUC6WyQaO8AO5RxkMLF9MO7k9V3fFJUQ/+JTmLQi/C0wXqfMBDJRCUfvDxMEXVIvBmmJHiU7jUbudoNMKpWYc3yaoMwW+PhhGTKOEBdVSyrGV5xiMWpzca24ld4gpfdo2sCgnZUNYlUXU+/XC49HKH2HLZ6im7/aKuWJJF1OzCf7xST5F3jeMR+byyFqRx28qlcghmwLKBwJQjsoqhI2O0P6NWfTYs1CAq8ShW/fwh8FEXBETcsDB9R6gmPcLPFYuvcE0GcBwFZerjs/MX9WHCxQIAQXcbSmRE6ggFPfI+ecyKRxt+bsIiAhgiHW8kV+b78bcnN6luoWx6n0wf8FOzjuBL4a9hxweVz7BIowT8N0Q6yKwigsDGLEPMNfauEfgYD7iJCWfIHBSNcFAPflfDaKIGj+CWB1M4IaITwVcXp3WhJW/bG224cXCOj2VgnnJrlKZVXDkQPvb2ZQBePuoHN/YtuAs+oPZKzeJXS6WfcM0aEvxwmBqvEPDQxhjRzVB6vI0TdkmHeieinXLbDkKRQqHz9Gtm13GHF/uEXBlvkD32IjUCW0V2kSWHB72gJIatoh7J9vI=
+  - secure: F+fgYjglmBJGMsUocoFKVkmI3m1SBf985FMPncWzH+rAyrXvKGaQ1/twMl9CEze6wp7q6PiBNS79flsn2eA0ER7Cbe5u4+GnGP1erYCfuJhUR8GsNBCoYTSiVqoKg6eZoIpnmZ6TDOCkqetfME7fLUNGgSew7k0j+WtoHkDxX/36cSh26HDaTXoLBwTxJRRxfrJBx1NRYvvfLk2GFJP/v0AVWoJ4n0txxcS3LZ4gHu/8EE8yVFjcRBmJGAha1AVETJ+U/YZ2obIXliZauZv1GZ+n6vBN1b/4Hef1jxPy5S3MjZ4q7OAgHg6iUDek4gShNlnUjvKjrnP1hBz13lf1ZVl7A2eSXS7SJ3vRuFazv+OcdyTt3x2OBTcpOxMdmhhFxxgj11gpQiI8y8Vztby07OKHtaoisuPv9vyJd6eWzj1MLMZCCt6JOBt8+LHf587qszWarqZHmdzlskg6hKYKSSliazfHsD541eXmL7lH2zuVaCdDtbLvpCwdmPLliyNPCTkbMu++gJmcZZxfwOCPNSR/0NUFbv8+V/jAQy4JaOjlMJDBvF8oKKaX/gyG4OrxEbHeOCHskDLt5hf35sAWgNl+Pv6MLCfEG+lTrqKNWAsMYu28B6g/fgtAtaCMoy+sB2SaojfMFR5GbES0NVrwrzOOkDYVwwzlHOUfVaI+9cE=
 install: true
 script:
-- ./build.sh
+- "./build.sh"
 notifications:
   slack:
     template:
-      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch}> by %{author} %{result} in %{duration}"
-      - "Image Name: readytalk/kamailio-docker:3.2.%{build_number}-%{commit}"
-    on_success: always # default: always
-    on_failure: always # default: always
+    - Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch}>
+      by %{author} %{result} in %{duration}
+    - 'Image Name: readytalk/kamailio-docker:3.2.%{build_number}-%{commit}'
+    on_success: always
+    on_failure: always
     rooms:
-      - secure: iHclNGXQuE5hKct86ewvLSb/q5M/BeFwjMUwQWJ2Knbi1tgORhw7F81wQhgtpSKrnkB+yScBlpI84mGHXXFFoGUXO925/Ed086WCFwbVb/1SXWJQMuuRuH2H6S7bMV9dCMr/X4hSBMfk7MUhI17BPd/OgHwtyoH8mdI1BJ1HeCmNG3EQuf00zNcbgUIeMZXYpPXz8TuWuSqK0i1uZRES3D6I8MKBH92djVwMaK3cUJ85DKn8/oAnnda7xef+WVHad0/NqwG4Qo0SpF+xPcxMof9nqvsHUmIXuYhJDRqJXOcWdZDXUxHT2y4vDYwQvywLyShCUfylxsEJRXJVJevq6UGvqTiK/2EV0iom+ptHSNa9RFzk/N9rgWr+sPLCec4xtWK4uP6zFdnx4/KFDCV+t58kOjx8U9P83NhP7N/7JH6kIsKwcrLYx84+7yFlEbjcnDcy5K5svEy58ikNeftgKxV82+/KSN3u82OQorQQmNm0R1cPVONR8DvD09pj0+t8f0Sxsapht7/Vqpga6bP15UJ+ZizHR5E6RzAjKBRqPlLJEF7MKcGqLCCDndqR/5Vrqkuxo8t0zgcV7hcOuCw+SkXSX2vqxX3v7jNoMKzogkstfc8yL2RoKB97gyF+HBMGSHL10jyfHOIkh4AnJLeW0OF9Vx2p1yzHK95JvFsMIhs=
+    - secure: iHclNGXQuE5hKct86ewvLSb/q5M/BeFwjMUwQWJ2Knbi1tgORhw7F81wQhgtpSKrnkB+yScBlpI84mGHXXFFoGUXO925/Ed086WCFwbVb/1SXWJQMuuRuH2H6S7bMV9dCMr/X4hSBMfk7MUhI17BPd/OgHwtyoH8mdI1BJ1HeCmNG3EQuf00zNcbgUIeMZXYpPXz8TuWuSqK0i1uZRES3D6I8MKBH92djVwMaK3cUJ85DKn8/oAnnda7xef+WVHad0/NqwG4Qo0SpF+xPcxMof9nqvsHUmIXuYhJDRqJXOcWdZDXUxHT2y4vDYwQvywLyShCUfylxsEJRXJVJevq6UGvqTiK/2EV0iom+ptHSNa9RFzk/N9rgWr+sPLCec4xtWK4uP6zFdnx4/KFDCV+t58kOjx8U9P83NhP7N/7JH6kIsKwcrLYx84+7yFlEbjcnDcy5K5svEy58ikNeftgKxV82+/KSN3u82OQorQQmNm0R1cPVONR8DvD09pj0+t8f0Sxsapht7/Vqpga6bP15UJ+ZizHR5E6RzAjKBRqPlLJEF7MKcGqLCCDndqR/5Vrqkuxo8t0zgcV7hcOuCw+SkXSX2vqxX3v7jNoMKzogkstfc8yL2RoKB97gyF+HBMGSHL10jyfHOIkh4AnJLeW0OF9Vx2p1yzHK95JvFsMIhs=
