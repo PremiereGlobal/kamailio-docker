@@ -1,29 +1,17 @@
 FROM debian:9
 
-RUN apt-get update && apt-get install -y \
-      kamailio \
-      kamailio-websocket-modules \
-      kamailio-mysql-modules \
-      kamailio-tls-modules \
-      kamailio-presence-modules \
-      procps \
-      tcpdump \
-      curl \
-    && apt-get clean && rm -rf /var/lib/apt/lists
+RUN apt-get update && apt-get install -y kamailio kamailio-mysql-modules kamailio-sqlite-modules kamailio-tls-modules kamailio-websocket-modules curl tcpdump sqlite
 
-WORKDIR /root
+#setup dumb-init
+RUN curl -k -L https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64 > /usr/bin/dumb-init
+RUN chmod 755 /usr/bin/dumb-init
 
-ENV INSTALL_EXTRA_TABLES=yes
-ENV INSTALL_PRESENCE_TABLES=yes
-ENV INSTALL_DBUID_TABLES=yes
-ENV SIPDOMAIN=sip.domain.com
-ENV PW="mysql_root_pass"
-ENV MYSQL_PASS="mysql_root_pass"
-ENV MYSQL_HOST="db.somedomain.com"
-ENV KAMAILIO_SH_MEM=128
-ENV KAMAILIO_PGK_MEM=12
 
-ADD ./kamctlrc /etc/kamailio/kamctlrc
+ADD ./configs/* /etc/kamailio/
+RUN mkdir /etc/kamailio/routes
+ADD ./configs/routes/* /etc/kamailio/routes/
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
-CMD /run.sh
+RUN kamdbctl create /etc/kamailio/kamailio.sqlite
+ENTRYPOINT ["/run.sh"]
+CMD ["/usr/sbin/kamailio", "-DD", "-P", "/var/run/kamailio.pid", "-f", "/etc/kamailio/kamailio.cfg"]
