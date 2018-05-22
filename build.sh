@@ -9,9 +9,9 @@ KAM_VER=${X[2]}
 
 KAM_A=(${KAM_VER//./ })
 
-docker tag rt-freeswitch:latest readytalk/kamailio-docker:${KAM_VER}
-docker tag rt-freeswitch:latest readytalk/kamailio-docker:${KAM_A[0]}.${KAM_A[1]}
-docker tag rt-freeswitch:latest readytalk/kamailio-docker:latest
+docker tag kamailio-docker:latest readytalk/kamailio-docker:${KAM_VER}
+docker tag kamailio-docker:latest readytalk/kamailio-docker:${KAM_A[0]}.${KAM_A[1]}
+docker tag kamailio-docker:latest readytalk/kamailio-docker:latest
 echo "-----------------------"
 echo "Saved Tag \"kamailio-docker:${KAM_VER}\""
 echo "Saved Tag \"kamailio-docker:${KAM_A[0]}.${KAM_A[1]}\""
