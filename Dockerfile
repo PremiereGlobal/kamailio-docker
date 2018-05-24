@@ -12,5 +12,6 @@ ADD ./configs/routes/* /etc/kamailio/routes/
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
 RUN kamdbctl create /etc/kamailio/kamailio.sqlite
+RUN touch /env.sh
 ENTRYPOINT ["/run.sh"]
 CMD ["/usr/sbin/kamailio", "-DD", "-P", "/var/run/kamailio.pid", "-f", "/etc/kamailio/kamailio.cfg"]
