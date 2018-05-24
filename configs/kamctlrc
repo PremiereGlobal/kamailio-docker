@@ -1,7 +1,7 @@
 SIP_DOMAIN=example.com
 DBENGINE=SQLITE
 DBHOST=localhost
-DB_URL=sqlite:////etc/kamailio/kamailio.sqlite
+DB_PATH="/etc/kamailio/kamailio.sqlite"
 INSTALL_EXTRA_TABLES=yes
 INSTALL_PRESENCE_TABLES=yes
 INSTALL_DBUID_TABLES=yes
