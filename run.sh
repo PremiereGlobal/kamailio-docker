@@ -13,7 +13,7 @@ for var in ${!DEFAULT_KAM*}; do
   fi
 done
 
-for var in $(compgen -e); do
+for var in ${!KAM_*}; do
   if [[ $var == KAM_* ]]; then
     echo "#!substdef \"!${var}!${!var}!g\"" >> "/etc/kamailio/vars.cfg"
   fi
