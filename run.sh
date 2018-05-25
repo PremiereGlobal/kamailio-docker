@@ -14,10 +14,16 @@ for var in ${!DEFAULT_KAM*}; do
 done
 
 for var in ${!KAM_*}; do
-  if [[ $var == KAM_* ]]; then
+  if [[ $var == KAM_*  && "${var}" != "KAM_DISPATCHER_ROUTES" ]]; then
     echo "#!substdef \"!${var}!${!var}!g\"" >> "/etc/kamailio/vars.cfg"
   fi
 done
+
+if [[ -n ${KAM_DISPATCHER_ROUTES} ]]; then
+  for rt in ${KAM_DISPATCHER_ROUTES/,/ }; do
+    echo "kamctl dispatcher add 0 \"${rt}\""
+  done
+fi
 
 
 
