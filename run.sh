@@ -21,7 +21,7 @@ done
 
 if [[ -n ${KAM_DISPATCHER_ROUTES} ]]; then
   for rt in ${KAM_DISPATCHER_ROUTES/,/ }; do
-    echo "kamctl dispatcher add 0 \"${rt}\""
+    kamctl dispatcher add 0 "${rt}"
   done
 fi
 
